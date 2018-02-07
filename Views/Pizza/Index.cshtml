@@ -1,0 +1,41 @@
+﻿@using adm = WebAppPizza.Areas.Admin.Models
+@model List<adm.PizzaViewModel>
+@{
+    ViewData["Title"] = "Index";
+    var PaginationPartial = new PaginationViewModel() { CurrentPage = ViewBag.CurrentPage, ItemsCount = (int)ViewBag.ItemsCount };
+
+}
+
+
+
+<h2>Index</h2>
+
+@Html.Partial("_PaginationPartial", PaginationPartial);
+
+<div class="row pizzas">
+    @foreach (var pizzaVM in Model)
+    {
+
+        @*@Html.Raw(pizzaVM.Pizza)*@
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <img src="~/images/@pizzaVM.Image" alt="@pizzaVM.Image">
+                <div class="caption">
+                    <h3>Votre Pizza - @pizzaVM.Title</h3>
+                    <p>@pizzaVM.Description</p>
+                    <p>@string.Format("{0:C2}", pizzaVM.PriceTTC)) </p>
+
+                    <p><a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@pizzaVM.IdPizza" class="btn btn-primary" role="button">Button</a></p>
+                    <p><a data-id="@pizzaVM.IdPizza" class="btn btn-primary detail" role="button">Détails</a></p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@Html.Partial("_PaginationPartial", PaginationPartial);
+
+<div class="container-modal"></div>
+@section Scripts{
+    <script src="~/js/pizza-controller.js"></script>
+}

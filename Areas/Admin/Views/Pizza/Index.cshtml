@@ -1,0 +1,40 @@
+﻿@model IEnumerable<WebAppPizza.Areas.Admin.Models.PizzaViewModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index Admin</h2>
+
+<div class="row">
+    <div class="col-md-10">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Title)</th>
+                    <th>@Html.DisplayNameFor(model => model.Description)</th>
+                    <th>@Html.DisplayNameFor(model => model.PriceHT)</th>
+                    <th>@Html.DisplayNameFor(model => model.Image)</th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+                {
+            <tr>
+                <td>
+                    <label>@item.Title</label>
+                </td>
+                    
+                <td>
+                    <label>@item.Description</label>
+                </td>
+                <td>
+                    <label>@item.PriceHT</label>
+                </td>
+                <td>
+                    <img src="~/images/@item.Image" class="img-responsive img-thumbnail" alt="Alternate Text" />
+                </td>
+            </tr>
+                }
+        </table>
+    </div>
+</div>
+
